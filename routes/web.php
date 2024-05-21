@@ -20,14 +20,13 @@ use App\Http\Controllers\Admin\DashboardController;
 Route::get('/', [PageController::class, 'index'])->name('home');
 
 // Rotte Admin
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
+
 Route::middleware(['auth', 'verified'])
     ->prefix('admin')
     ->name('admin.')
     ->group(function () {
         Route::get('/', [DashboardController::class, 'index'])->name('home');
+        // qui inseriamo tutte le rotte delle CRUD
     });
 
 // Rotte Auth
