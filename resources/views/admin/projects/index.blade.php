@@ -61,10 +61,17 @@
                             <input type="text" value="{{ $project->creation_date }}" name="creation_date">
                         </td>
                     </form>
-                    <td>
-                        <button class="btn btn-warning btn-sm" onclick="submitForm( {{ $project->id }} )"><i
+                    <td class="d-flex">
+                        <button class="btn btn-warning btn-sm me-1" onclick="submitForm( {{ $project->id }} )"><i
                                 class="fa-solid fa-pencil"></i></button>
-                        <button class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></i></button>
+
+                        <form action="{{ route('admin.projects.destroy', $project) }}" method="POST"
+                            onsubmit="return confirm('Sei sicuro di voler eliminare il progetto?')">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></i></button>
+                        </form>
+
                     </td>
 
                 </tr>
