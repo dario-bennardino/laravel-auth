@@ -1,6 +1,6 @@
 <header>
 
-    <nav class="navbar bg-body-tertiary">
+    <nav class="navbar bg-dark navbar-dark">
         <div class="container-fluid">
             <a href="{{ route('home') }}" target="_blank" class="navbar-brand">Vedi il sito</a>
             <div class="d-flex">
