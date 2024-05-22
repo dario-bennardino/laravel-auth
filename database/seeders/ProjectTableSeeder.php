@@ -22,7 +22,7 @@ class ProjectTableSeeder extends Seeder
             $new_project->slug = Help::generateSlug($new_project->title, Project::class);
             $new_project->description = $faker->paragraph(3, true);
             $new_project->creation_date = $faker->date();
-            dump($new_project);
+            // dump($new_project);
             $new_project->save();
         }
     }
