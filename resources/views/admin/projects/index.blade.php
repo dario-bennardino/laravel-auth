@@ -3,6 +3,15 @@
 @section('content')
     <h2>Projects</h2>
 
+    @if ($errors->any())
+        <div class="alert alert-danger" role="alert">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     @if (session('error'))
         <div class="alert alert-danger" role="alert">
             {{ session('error') }}
@@ -35,25 +44,41 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($projects as $item)
+            @foreach ($projects as $project)
                 <tr>
+
+                    <form action="{{ route('admin.projects.update', $project) }}" method="POST"
+                        id="form-edit-{{ $project->id }}">
+                        @csrf
+                        @method('PUT')
+                        <td>
+                            <input type="text" value="{{ $project->title }}" name="title">
+                        </td>
+                        <td>
+                            <input type="text" value="{{ $project->description }}" name="description">
+                        </td>
+                        <td>
+                            <input type="text" value="{{ $project->creation_date }}" name="creation_date">
+                        </td>
+                    </form>
                     <td>
-                        <input type="text" value="{{ $item->title }}">
-                    </td>
-                    <td>
-                        <input type="text" value="{{ $item->description }}">
-                    </td>
-                    <td>
-                        <input type="text" value="{{ $item->creation_date }}">
-                    </td>
-                    <td>
-                        <button class="btn btn-warning btn-sm"><i class="fa-solid fa-pencil"></i></button>
+                        <button class="btn btn-warning btn-sm" onclick="submitForm( {{ $project->id }} )"><i
+                                class="fa-solid fa-pencil"></i></button>
                         <button class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></i></button>
                     </td>
+
                 </tr>
             @endforeach
 
 
         </tbody>
     </table>
+
+    <script>
+        function submitForm(id) {
+
+            const form = document.getElementById(`form-edit-${id}`);
+            form.submit();
+        }
+    </script>
 @endsection
