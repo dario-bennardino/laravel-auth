@@ -5,7 +5,11 @@
                 <a href="{{ route('admin.projects.index') }}"><i class="fa-solid fa-folder"></i>Projects</a>
             </li>
             <li>
-                <a href="#"><i class="fa-solid fa-list-check"></i></i>Technologies</a>
+                <a href="#"><i class="fa-solid fa-plus"></i>New Project</a>
+            </li>
+            <li>
+                <a href="{{ route('admin.technologies.index') }}"><i
+                        class="fa-solid fa-list-check"></i></i>Technologies</a>
             </li>
             <li>
                 <a href="#"><i class="fa-solid fa-list-check"></i></i>Types</a>

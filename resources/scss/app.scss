@@ -6,6 +6,12 @@ header {
 
 .main-wrapper {
     height: calc(100vh - 56px);
+
+    .content {
+        height: 100%;
+        overflow: auto;
+    }
+
     // background-color: aqua;
 
 }
