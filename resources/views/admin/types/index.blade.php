@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-    <h2>Projects</h2>
+    <h2>Types</h2>
 
     @if ($errors->any())
         <div class="alert alert-danger" role="alert">
@@ -24,11 +24,9 @@
     @endif
 
     <div class="my-4">
-        <form action="{{ route('admin.projects.store') }}" method="POST" class="d-flex">
+        <form action="{{ route('admin.types.store') }}" method="POST" class="d-flex">
             @csrf
-            <input class="form-control me-2" type="search" placeholder="New Project" name="title">
-            <input class="form-control me-2" type="search" placeholder="Description" name="description">
-            <input class="form-control me-2" type="search" placeholder="Date" name="creation_date">
+            <input class="form-control me-2" type="search" placeholder="New types" name="name">
             <button class="btn btn-outline-success" type="submit">Send</button>
         </form>
 
@@ -37,36 +35,29 @@
     <table class="table crud-table">
         <thead>
             <tr>
-                <th scope="col">Projects</th>
-                <th scope="col">Description</th>
-                <th scope="col">Date</th>
+                <th scope="col">Type</th>
                 <th scope="col">Actions</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($projects as $project)
+            @foreach ($types as $type)
                 <tr>
 
-                    <form action="{{ route('admin.projects.update', $project) }}" method="POST"
-                        id="form-edit-{{ $project->id }}">
+                    <form action="{{ route('admin.types.update', $type) }}" method="POST"
+                        id="form-edit-{{ $type->id }}">
                         @csrf
                         @method('PUT')
                         <td>
-                            <input type="text" value="{{ $project->title }}" name="title">
+                            <input type="text" value="{{ $type->name }}" name="name">
                         </td>
-                        <td>
-                            <input type="text" value="{{ $project->description }}" name="description">
-                        </td>
-                        <td>
-                            <input type="text" value="{{ $project->creation_date }}" name="creation_date">
-                        </td>
+
                     </form>
                     <td class="d-flex">
-                        <button class="btn btn-warning btn-sm me-1" onclick="submitForm( {{ $project->id }} )"><i
+                        <button class="btn btn-warning btn-sm me-1" onclick="submitForm( {{ $type->id }} )"><i
                                 class="fa-solid fa-pencil"></i></button>
 
-                        <form action="{{ route('admin.projects.destroy', $project) }}" method="POST"
-                            onsubmit="return confirm('Sei sicuro di voler eliminare il progetto?')">
+                        <form action="{{ route('admin.types.destroy', $type) }}" method="POST"
+                            onsubmit="return confirm('Sei sicuro di voler eliminare la type?')">
                             @csrf
                             @method('DELETE')
                             <button class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></i></button>
@@ -88,5 +79,4 @@
             form.submit();
         }
     </script>
-    {{ $projects->links('pagination::bootstrap-5') }}
 @endsection
