@@ -2,6 +2,9 @@
     <nav>
         <ul>
             <li>
+                <a href="{{ route('admin.home') }}"><i class="fa-solid fa-house"></i>Home</a>
+            </li>
+            <li>
                 <a href="{{ route('admin.projects.index') }}"><i class="fa-solid fa-folder"></i>Projects</a>
             </li>
             <li>
