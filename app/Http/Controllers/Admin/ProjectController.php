@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Project;
 use App\Functions\Helper as Help;
+use App\Http\Requests\ProjectRequest;
+
 
 class ProjectController extends Controller
 {
@@ -15,7 +17,7 @@ class ProjectController extends Controller
     public function index()
     {
         // $projects = Project::all();
-        $projects = Project::paginate(15);
+        $projects = Project::orderBy('id', 'desc')->paginate(15);
         return view('admin.projects.index', compact('projects'));
     }
 
@@ -24,38 +26,58 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.projects.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ProjectRequest $request)
     {
         // prima di inserire una nuovo progetto verifico che non sia presente
         // se esiste ritorno alla index con un messaggio di errore
         // se non esiste la salvo e ritorno alla index con un messaggio di success
-        $exixts = Project::where('title', $request->title)->first();
-        if ($exixts) {
-            return redirect()->route('admin.projects.index')->with('error', 'Progetto già esistente');
-        } else {
-            $new = new Project();
-            $new->title = $request->title;
-            $new->slug = Help::generateSlug($new->title, Project::class);
-            $new->description = $request->description;
-            $new->creation_date = $request->creation_date;
-            $new->save();
 
-            return redirect()->route('admin.projects.index')->with('success', 'Progetto creato correttamente');
-        }
+        // $exixts = Project::where('title', $request->title)->first();
+        // if ($exixts) {
+        //     return redirect()->route('admin.projects.index')->with('error', 'Progetto già esistente');
+        // } else {
+        //     $new = new Project();
+        //     $new->title = $request->title;
+        //     $new->slug = Help::generateSlug($new->title, Project::class);
+        //     $new->description = $request->description;
+        //     $new->creation_date = $request->creation_date;
+        //     $new->save();
+
+        //     return redirect()->route('admin.projects.index')->with('success', 'Progetto creato correttamente');
+        // }
+
+        $form_data = $request->all();
+        $form_data['slug'] = Help::generateSlug($form_data['title'], Project::class);
+
+        $new = new Project();
+        $new->fill($form_data);
+        $new->save();
+
+        return redirect()->route('admin.projects.show', $new)->with('success', 'Progetto creato correttamente');
+
+
+
+
+
+
+
+        // dd($form_data);
+
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Project $project)
     {
-        //
+        // dd($project);
+        return redirect()->route('admin.projects.index')->with('success', 'Progetto aggiunto correttamente');
     }
 
     /**

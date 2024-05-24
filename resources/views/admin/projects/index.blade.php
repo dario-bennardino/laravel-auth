@@ -3,7 +3,29 @@
 @section('content')
     <h2>Projects</h2>
 
-    @if ($errors->any())
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Project</th>
+                <th scope="col">Date</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @forelse ($projects as $project)
+                <tr>
+                    <td>{{ $project->id }}</td>
+                    <td>{{ $project->title }}</td>
+                    <td>{{ $project->creation_date }}</td>
+                    <td>bottoni</td>
+                </tr>
+            @empty
+            @endforelse
+        </tbody>
+    </table>
+
+    {{-- @if ($errors->any())
         <div class="alert alert-danger" role="alert">
             <ul>
                 @foreach ($errors->all() as $error)
@@ -21,9 +43,9 @@
         <div class="alert alert-success" role="alert">
             {{ session('success') }}
         </div>
-    @endif
+    @endif --}}
 
-    <div class="my-4">
+    {{-- <div class="my-4">
         <form action="{{ route('admin.projects.store') }}" method="POST" class="d-flex">
             @csrf
             <input class="form-control me-2" type="search" placeholder="New Project" name="title">
@@ -87,6 +109,6 @@
             const form = document.getElementById(`form-edit-${id}`);
             form.submit();
         }
-    </script>
+    </script> --}}
     {{ $projects->links('pagination::bootstrap-5') }}
 @endsection
