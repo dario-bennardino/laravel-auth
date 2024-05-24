@@ -19,6 +19,7 @@ header {
 
 aside {
     width: 180px;
+    flex-shrink: 0;
 
     ul {
         list-style: none;
