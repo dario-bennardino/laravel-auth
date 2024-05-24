@@ -61,12 +61,6 @@ class ProjectController extends Controller
 
         return redirect()->route('admin.projects.show', $new)->with('success', 'Progetto creato correttamente');
 
-
-
-
-
-
-
         // dd($form_data);
 
     }
@@ -85,7 +79,7 @@ class ProjectController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        // return redirect()->route('admin.projects.index');
     }
 
     /**

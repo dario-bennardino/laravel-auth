@@ -18,12 +18,31 @@
                     <td>{{ $project->id }}</td>
                     <td>{{ $project->title }}</td>
                     <td>{{ $project->creation_date }}</td>
-                    <td>bottoni</td>
+                    <td class="d-flex">
+                        <a href="#" class="btn btn-warning btn-sm me-1" onclick="submitForm( {{ $project->id }} )"><i
+                                class="fa-solid fa-pencil"></i></a>
+
+                        <form action="{{ route('admin.projects.destroy', $project) }}" method="POST"
+                            onsubmit="return confirm('Sei sicuro di voler eliminare il progetto?')">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></i></button>
+                        </form>
+
+                    </td>
                 </tr>
             @empty
             @endforelse
         </tbody>
     </table>
+
+    <script>
+        function submitForm(id) {
+
+            const form = document.getElementById(`form-edit-${id}`);
+            form.submit();
+        }
+    </script>
 
     {{-- @if ($errors->any())
         <div class="alert alert-danger" role="alert">
