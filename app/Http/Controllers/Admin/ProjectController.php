@@ -77,9 +77,10 @@ class ProjectController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Request $request, Project $project)
     {
-        // return redirect()->route('admin.projects.index');
+
+        //
     }
 
     /**
@@ -93,6 +94,9 @@ class ProjectController extends Controller
         */
         // se esiste ritorno alla index con un messaggio di errore
         // se non esiste la salvo e ritorno alla index con un messaggio di success
+
+        return view('admin.projects.update');
+
         $val_data = $request->validate(
             [
                 'title' => 'required|min:2|max:100',

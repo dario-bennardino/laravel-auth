@@ -19,8 +19,8 @@
                     <td>{{ $project->title }}</td>
                     <td>{{ $project->creation_date }}</td>
                     <td class="d-flex">
-                        <a href="#" class="btn btn-warning btn-sm me-1" onclick="submitForm( {{ $project->id }} )"><i
-                                class="fa-solid fa-pencil"></i></a>
+                        <a href="{{ route('admin.projects.update', $project) }}" class="btn btn-warning btn-sm me-1"
+                            onclick="submitForm( {{ $project->id }} )"><i class="fa-solid fa-pencil"></i></a>
 
                         <form action="{{ route('admin.projects.destroy', $project) }}" method="POST"
                             onsubmit="return confirm('Sei sicuro di voler eliminare il progetto?')">
