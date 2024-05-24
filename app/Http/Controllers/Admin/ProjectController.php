@@ -80,7 +80,7 @@ class ProjectController extends Controller
     public function edit(Request $request, Project $project)
     {
 
-        //
+        return view('admin.projects.edit', compact('project'));
     }
 
     /**
@@ -95,7 +95,7 @@ class ProjectController extends Controller
         // se esiste ritorno alla index con un messaggio di errore
         // se non esiste la salvo e ritorno alla index con un messaggio di success
 
-        return view('admin.projects.update');
+        // return view('admin.projects.update');
 
         $val_data = $request->validate(
             [
